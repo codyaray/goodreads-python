@@ -5,9 +5,12 @@ from xml.parsers.expat import ExpatError, ErrorString
 
 class GoodReadsParser(object):
 
-    def parse_result(self, url_handler):
+    def parse_result_string(self, result):
+        return self.parse_result(result, parse_func = minidom.parseString)
+
+    def parse_result(self, url_handler, parse_func = minidom.parse):
         try:
-            goodreads_dom = minidom.parse(url_handler)
+            goodreads_dom = parse_func(url_handler)
             return goodreads_dom
         except ExpatError, e:
             logging.error("XML Error: %s line: %d offset: %d" % (
