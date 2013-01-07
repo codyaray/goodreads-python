@@ -39,9 +39,9 @@ class GoodReadsClient(object):
         if response['status'] != '200':
                 raise Exception('Invalid response: %s' % response['status'])
 
-                request_token = dict(urlparse.parse_qsl(content))
+        request_token = dict(urlparse.parse_qsl(content))
 
-                authorize_link = '%s?oauth_token=%s' % (authorize_url,
+        authorize_link = '%s?oauth_token=%s' % (authorize_url,
                                                         request_token['oauth_token'])
 
         token = oauth.Token(request_token['oauth_token'],
